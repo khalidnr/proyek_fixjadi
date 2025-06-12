@@ -3,6 +3,22 @@ ini_set('session.cookie_httponly', 1);
 ini_set('session.cookie_secure', 0);         
 ini_set('session.cookie_samesite', 'Strict'); 
 
+function writeLog($level, $message, $context = []) {
+    $timestamp = date('Y-m-d H:i:s');
+    $logEntry = [
+        'timestamp' => $timestamp,
+        'level' => $level,
+        'message' => $message,
+        'context' => $context,
+        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
+        'request_uri' => $_SERVER['REQUEST_URI'] ?? 'unknown'
+}
+
+writeLog('INFO', 'Home page accessed', [
+    'user_id' => $_SESSION['user_id'] ?? 'guest'
+]);
+
 session_start();
 require 'db.php';
 
