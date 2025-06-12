@@ -1,4 +1,33 @@
 <?php
+
+function writeLog($level, $message, $context = []) {
+    $timestamp = date('Y-m-d H:i:s');
+    $logEntry = [
+        'timestamp' => $timestamp,
+        'level' => $level,
+        'message' => $message,
+        'context' => $context,
+        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
+        'request_uri' => $_SERVER['REQUEST_URI'] ?? 'unknown'
+}
+
+writeLog('INFO', 'Login attempt', [
+    'username' => $_POST['username'] ?? 'unknown'
+]);
+
+if ($loginSuccess) {
+    writeLog('INFO', 'Login successful', [
+        'username' => $username,
+        'session_id' => session_id()
+    ]);
+} else {
+    writeLog('WARN', 'Login failed', [
+        'username' => $_POST['username'] ?? 'unknown',
+        'reason' => 'Invalid credentials'
+    ]);
+}
+
 session_start();
 require 'db.php';
 
