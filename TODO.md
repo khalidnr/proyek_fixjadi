@@ -348,7 +348,45 @@ Instal dockernya gimana
 ```
 
 ## Monitor
-# Buat user untuk Prometheus
+Buat user untuk Prometheus
 ```
 sudo useradd --no-create-home --shell /bin/false prometheus
+```
+Buat direktori untuk Prometheus
+```
+sudo mkdir /etc/prometheus
+sudo mkdir /var/lib/prometheus
+```
+Set ownership
+```
+sudo chown prometheus:prometheus /etc/prometheus
+sudo chown prometheus:prometheus /var/lib/prometheus
+```
+Download Prometheus
+```
+cd /tmp
+wget https://github.com/prometheus/prometheus/releases/download/v2.40.0/prometheus-2.40.0.linux-amd64.tar.gz
+```
+Extract file
+```
+tar xvf prometheus-2.40.0.linux-amd64.tar.gz
+cd prometheus-2.40.0.linux-amd64
+```
+Buat file konfigurasi prometheus.yml
+```
+```
+Buat service file
+```
+```
+Reload systemd
+```
+sudo systemctl daemon-reload
+```
+Start prometheus
+```
+sudo systemctl start prometheus
+```
+Enable auto start
+```
+sudo systemctl enable prometheus
 ```
