@@ -348,7 +348,7 @@ Instal dockernya gimana
 ```
 
 ## Monitor
-Instal prometheus nya gimana
+# Buat user untuk Prometheus
 ```
-
+sudo useradd --no-create-home --shell /bin/false prometheus
 ```
